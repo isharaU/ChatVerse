@@ -9,6 +9,7 @@
   "author": "ishara",
   "license": "MIT",
   "dependencies": {
+    "chatverse": "file:",
     "express": "^4.21.2"
   }
 }
