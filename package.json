@@ -4,11 +4,14 @@
   "description": "Connect to a universe of communication, where every message brings people closer.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon backend/server.js"
   },
   "author": "ishara",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.21.2"
+    "chatverse": "file:",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
   }
 }
