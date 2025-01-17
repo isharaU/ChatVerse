@@ -1,0 +1,14 @@
+{
+  "name": "chatverse",
+  "version": "1.0.0",
+  "description": "Connect to a universe of communication, where every message brings people closer.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ishara",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
