@@ -35,8 +35,8 @@ const Login = () => {
         Log in
       </Heading>
 
-        <VStack spacing={4} align="stretch">
-          <FormControl id="email" isRequired>
+      <VStack spacing={4} align="stretch">
+        <FormControl id="email" isRequired>
           <FormLabel color="teal.600">Email</FormLabel>
           <Input
             placeholder="Enter Your Email"
@@ -70,11 +70,28 @@ const Login = () => {
           onClick={submitHandler}
           _hover={{ bg: "teal.600" }}
         >
-          Log in
+          Log in 
         </Button>
+
+        <Button
+          colorScheme="blue"
+          variant="solid"
+          width="100%"
+          style={{ marginTop: 0 }}
+          onClick={() => {
+            setEmail("guest@example.com");
+            setPassword("guest");
+          }}
+          bg="blue.600" // Default background color
+          _hover={{ bg: "blue.300" }}
+        >
+          Log as a Guest
+      </Button>
+
+
       </VStack>
     </Box>
   );
-}
+};
 
-export default Login
+export default Login;
