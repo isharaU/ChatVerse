@@ -12,10 +12,21 @@ function Homepage() {
         m="40px 0 15px 0"
         borderRadius="lg"
         borderWidth="1px"
-      >
-        <Text fontSize="4xl" fontFamily="Work sans" align="center">
+        color={"red.500"}
+      >ø
+        <Text
+          fontSize="5xl"
+          fontFamily="Work sans"
+          textAlign="center"
+          fontWeight="bold"
+          bgGradient="linear(to-r, teal.400, blue.500)"
+          bgClip="text"
+          letterSpacing="widest"
+          mb={4}
+        >
           chatVerse
         </Text>
+
       </Box>
       <Box bg="white" p={8} w="100%" borderRadius="lg" borderWidth="1px">
         <Demo />
