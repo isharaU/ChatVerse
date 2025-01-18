@@ -1,4 +1,6 @@
 import { Box, Container, Text, Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import Login from "../components/authentication/Login";
+import Signup from "../components/authentication/Signup";
 
 function Homepage() {
   return (
@@ -57,10 +59,10 @@ const Demo = () => {
       </TabList>
       <TabPanels>
         <TabPanel bg="gray.50" p="5" borderRadius="md" boxShadow="md">
-          <p style={{ color: "teal.600", fontSize: "1.2em" }}>Welcome back! Please log in.</p>
+          <Login />
         </TabPanel>
         <TabPanel bg="gray.50" p="5" borderRadius="md" boxShadow="md">
-          <p style={{ color: "blue.600", fontSize: "1.2em" }}>Create your account here!</p>
+          <Signup />
         </TabPanel>
       </TabPanels>
     </Tabs>
