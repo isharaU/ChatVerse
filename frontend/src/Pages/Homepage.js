@@ -49,8 +49,8 @@ const Demo = () => {
           Log in
         </Tab>
         <Tab
-          _selected={{ color: "white", bg: "blue.500" }} // Matching selected blue color
-          _hover={{ bg: "blue.300" }} // Matching hover blue color
+          _selected={{ color: "white", bg: "teal.500" }} // Matching selected blue color
+          _hover={{ bg: "teal.300" }} // Matching hover blue color
           fontWeight="bold"
         >
           Sign up
