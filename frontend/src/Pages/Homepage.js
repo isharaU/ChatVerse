@@ -14,7 +14,7 @@ function Homepage() {
         borderWidth="1px"
       >
         <Text fontSize="4xl" fontFamily="Work sans" align={"center"}>
-          Talk-A-Tive
+          chatVerse
         </Text>
       </Box>
     </Container>
