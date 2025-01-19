@@ -4,6 +4,7 @@ const dotenv = require('dotenv'); // Import dotenv
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes'); // Import user routes
 const {notFound, errorHandler} = require('../backend/middleware/errorMiddleware'); // Import the error middleware
+const chatRoutes = require('./routes/chatRoutes'); // Import chat routes
 
 const app = express(); // Create an express app
 dotenv.config(); // Configure dotenv
@@ -16,6 +17,7 @@ app.get('/',(req,res) => { // Create a route for the home page
 });
 
 app.use('/api/user',userRoutes); // Use the user routes
+app.use('/api/chat',chatRoutes); // Use the chat routes
 
 app.use(notFound); // Use the notFound middleware
 app.use(errorHandler); // Use the errorHandler middleware
