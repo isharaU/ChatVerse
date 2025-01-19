@@ -9,6 +9,7 @@
   "author": "ishara",
   "license": "MIT",
   "dependencies": {
+    "@chakra-ui/cli": "^3.4.0",
     "bcryptjs": "^2.4.3",
     "chatverse": "file:",
     "dotenv": "^16.4.7",

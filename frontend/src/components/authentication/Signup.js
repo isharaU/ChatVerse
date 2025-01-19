@@ -9,29 +9,70 @@ import {
   Button,
   Box,
   Heading,
+  useToast,
 } from "@chakra-ui/react";
 
 const Signup = () => {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmpassword, setConfirmPassword] = useState();
-  const [pic, setPic] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
+  const [pic, setPic] = useState(null);
+
+  const toast = useToast();
 
   const handleClick = () => setShow(!show);
 
-  const postDetails = (pics) => {};
+  const postDetails = (pics) => {
+    if (!pics) {
+      toast({
+        title: "Please select a file.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
 
-  const submitHandler = () => {};
+    // Placeholder for file upload logic
+    console.log("File selected:", pics);
+  };
+
+  const submitHandler = () => {
+    if (!name || !email || !password || !confirmpassword) {
+      toast({
+        title: "Please fill in all fields.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    if (password !== confirmpassword) {
+      toast({
+        title: "Passwords do not match.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    // Placeholder for form submission logic
+    console.log("Form submitted:", { name, email, password, pic });
+  };
 
   return (
-    <Box 
-      maxW="lg" 
-      borderWidth={1} 
-      borderRadius="lg" 
-      p={6} 
-      m="auto" 
+    <Box
+      maxW="lg"
+      borderWidth={1}
+      borderRadius="lg"
+      p={6}
+      m="auto"
       bg="gray.50"
       boxShadow="xl"
     >
@@ -40,7 +81,7 @@ const Signup = () => {
       </Heading>
 
       <VStack spacing={4} align="stretch">
-        <FormControl id="first-name" isRequired>
+        <FormControl id="name" isRequired>
           <FormLabel color="teal.600">Username</FormLabel>
           <Input
             placeholder="Enter Your Name"
@@ -62,31 +103,31 @@ const Signup = () => {
           <FormLabel color="teal.600">Password</FormLabel>
           <InputGroup>
             <Input
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="Enter Your Password"
               onChange={(e) => setPassword(e.target.value)}
               focusBorderColor="teal.400"
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={handleClick} colorScheme="teal">
-                {show ? 'Hide' : 'Show'}
+                {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
         </FormControl>
 
-        <FormControl id="Confirm password" isRequired>
+        <FormControl id="confirm-password" isRequired>
           <FormLabel color="teal.600">Confirm Password</FormLabel>
           <InputGroup>
             <Input
-              type={show ? 'text' : 'password'}
+              type={show ? "text" : "password"}
               placeholder="Confirm Your Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
               focusBorderColor="teal.400"
             />
             <InputRightElement width="4.5rem">
               <Button h="1.75rem" size="sm" onClick={handleClick} colorScheme="teal">
-                {show ? 'Hide' : 'Show'}
+                {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
