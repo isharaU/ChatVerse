@@ -14,7 +14,7 @@ app.get('/',(req,res) => { // Create a route for the home page
     res.send('API is Running'); // Send a response to the client
 });
 
-app.use('/apu/user',userRoutes); // Use the user routes
+app.use('/api/user',userRoutes); // Use the user routes
 
 const PORT = process.env.PORT || 5000; // Define the port
 
