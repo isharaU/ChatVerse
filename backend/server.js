@@ -8,7 +8,7 @@ const app = express(); // Create an express app
 dotenv.config(); // Configure dotenv
 connectDB(); // Connect to the database
 
-app.use(express.json()); // Use express to parse JSON data
+app.use(express.json()); // Parse JSON bodies
 
 app.get('/',(req,res) => { // Create a route for the home page
     res.send('API is Running'); // Send a response to the client
