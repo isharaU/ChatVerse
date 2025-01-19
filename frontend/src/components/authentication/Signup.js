@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -19,6 +19,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [pic, setPic] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const toast = useToast();
 
@@ -36,8 +37,34 @@ const Signup = () => {
       return;
     }
 
-    // Placeholder for file upload logic
-    console.log("File selected:", pics);
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      setLoading(true);
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "chatVerse");
+      data.append("cloud_name", "dhiaatnwo");
+      fetch("https://api.cloudinary.com/v1_1/dhiaatnwo/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
+    } else {
+      toast({
+        title: "Please select an image file.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
   };
 
   const submitHandler = () => {
@@ -109,7 +136,12 @@ const Signup = () => {
               focusBorderColor="teal.400"
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick} colorScheme="teal">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+                colorScheme="teal"
+              >
                 {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
@@ -126,7 +158,12 @@ const Signup = () => {
               focusBorderColor="teal.400"
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick} colorScheme="teal">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+                colorScheme="teal"
+              >
                 {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
@@ -151,6 +188,7 @@ const Signup = () => {
           style={{ marginTop: 15 }}
           onClick={submitHandler}
           _hover={{ bg: "teal.600" }}
+          isLoading={loading}
         >
           Sign Up
         </Button>
