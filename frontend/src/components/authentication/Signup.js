@@ -186,7 +186,8 @@ const Signup = () => {
         />
       </FormControl>
       <Button
-        colorScheme="blue"
+        colorScheme="teal"
+        variant={"solid"}
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
