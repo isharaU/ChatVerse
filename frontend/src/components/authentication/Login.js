@@ -1,96 +1,128 @@
-import React, { useState } from 'react';
 import {
+  Button,
   FormControl,
   FormLabel,
   Input,
-  VStack,
   InputGroup,
   InputRightElement,
-  Button,
-  Box,
-  Heading,
+  VStack,
+  useToast,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+// import { ChatState } from "../../Context/ChatProvider"; // Commented out due to missing ChatProvider context
 
 const Login = () => {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
   const handleClick = () => setShow(!show);
+  const toast = useToast();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const submitHandler = () => {};
+  const navigate = useNavigate();
+  // const { setUser } = ChatState(); // Commented out due to missing ChatProvider context
+
+  const submitHandler = async () => {
+    setLoading(true);
+    if (!email || !password) {
+      toast({
+        title: "Please fill all the fields",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
+        "/api/user/login",
+        { email, password },
+        config
+      );
+
+      toast({
+        title: "Login Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      // setUser(data); // Commented out due to missing ChatProvider context
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      navigate("/chats");
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: error.response?.data?.message || "Something went wrong",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
+  };
 
   return (
-    <Box 
-      maxW="lg" 
-      borderWidth={1} 
-      borderRadius="lg" 
-      p={6} 
-      m="auto" 
-      bg="gray.50"
-      boxShadow="xl"
-    >
-      <Heading as="h2" size="lg" textAlign="center" mb={6} color="teal.500">
-        Log in
-      </Heading>
-
-      <VStack spacing={4} align="stretch">
-        <FormControl id="email" isRequired>
-          <FormLabel color="teal.600">Email</FormLabel>
+    <VStack spacing="10px">
+      <FormControl id="email" isRequired>
+        <FormLabel>Email Address</FormLabel>
+        <Input
+          value={email}
+          type="email"
+          placeholder="Enter Your Email Address"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </FormControl>
+      <FormControl id="password" isRequired>
+        <FormLabel>Password</FormLabel>
+        <InputGroup size="md">
           <Input
-            placeholder="Enter Your Email"
-            onChange={(e) => setEmail(e.target.value)}
-            focusBorderColor="teal.400"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type={show ? "text" : "password"}
+            placeholder="Enter password"
           />
-        </FormControl>
-
-        <FormControl id="password" isRequired>
-          <FormLabel color="teal.600">Password</FormLabel>
-          <InputGroup>
-            <Input
-              type={show ? 'text' : 'password'}
-              placeholder="Enter Your Password"
-              onChange={(e) => setPassword(e.target.value)}
-              focusBorderColor="teal.400"
-            />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick} colorScheme="teal">
-                {show ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-        </FormControl>
-
-        <Button
-          colorScheme="teal"
-          variant="solid"
-          width="100%"
-          style={{ marginTop: 15 }}
-          onClick={submitHandler}
-          _hover={{ bg: "teal.600" }}
-        >
-          Log in 
-        </Button>
-
-        <Button
-          colorScheme="blue"
-          variant="solid"
-          width="100%"
-          style={{ marginTop: 0 }}
-          onClick={() => {
-            setEmail("guest@example.com");
-            setPassword("guest");
-          }}
-          bg="blue.600" // Default background color
-          _hover={{ bg: "blue.300" }}
-        >
-          Log as a Guest
+          <InputRightElement width="4.5rem">
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      </FormControl>
+      <Button
+        colorScheme="teal"
+        width="100%"
+        style={{ marginTop: 15 }}
+        onClick={submitHandler}
+        isLoading={loading}
+      >
+        Login
       </Button>
-
-
-      </VStack>
-    </Box>
+      <Button
+        variant="solid"
+        colorScheme="blue"
+        width="100%"
+        onClick={() => {
+          setEmail("guest@example.com");
+          setPassword("123456");
+        }}
+      >
+        Get Guest User Credentials
+      </Button>
+    </VStack>
   );
 };
 
