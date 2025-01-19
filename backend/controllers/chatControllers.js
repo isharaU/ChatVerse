@@ -1,11 +1,22 @@
+// Commenting out model imports until they are implemented
 const asyncHandler = require("express-async-handler");
-const Chat = require("../models/chatModel");
-const User = require("../models/userModel");
+// const Chat = require("../models/chatModel");
+// const User = require("../models/userModel");
 
 //@description     Create or fetch One to One Chat
 //@route           POST /api/chat/
 //@access          Protected
 const accessChat = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: isGroupChat, users, latestMessage
+    2. userModel with schema containing: name, pic, email, password
+    3. Authentication middleware that provides req.user
+  */
+  res.status(501).send("Not implemented - Requires Chat and User models");
+  
+  // Original implementation commented out
+  /*
   const { userId } = req.body;
 
   if (!userId) {
@@ -49,12 +60,23 @@ const accessChat = asyncHandler(async (req, res) => {
       throw new Error(error.message);
     }
   }
+  */
 });
 
 //@description     Fetch all chats for a user
 //@route           GET /api/chat/
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: users, groupAdmin, latestMessage
+    2. userModel with schema containing: name, pic, email, password
+    3. Authentication middleware that provides req.user
+  */
+  res.status(501).send("Not implemented - Requires Chat and User models");
+  
+  // Original implementation commented out
+  /*
   try {
     Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
       .populate("users", "-password")
@@ -72,12 +94,22 @@ const fetchChats = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error(error.message);
   }
+  */
 });
 
 //@description     Create New Group Chat
 //@route           POST /api/chat/group
 //@access          Protected
 const createGroupChat = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: chatName, users, isGroupChat, groupAdmin
+    2. Authentication middleware that provides req.user
+  */
+  res.status(501).send("Not implemented - Requires Chat model");
+  
+  // Original implementation commented out
+  /*
   if (!req.body.users || !req.body.name) {
     return res.status(400).send({ message: "Please Fill all the feilds" });
   }
@@ -109,12 +141,21 @@ const createGroupChat = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error(error.message);
   }
+  */
 });
 
 // @desc    Rename Group
 // @route   PUT /api/chat/rename
 // @access  Protected
 const renameGroup = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: chatName, users, groupAdmin
+  */
+  res.status(501).send("Not implemented - Requires Chat model");
+  
+  // Original implementation commented out
+  /*
   const { chatId, chatName } = req.body;
 
   const updatedChat = await Chat.findByIdAndUpdate(
@@ -135,15 +176,22 @@ const renameGroup = asyncHandler(async (req, res) => {
   } else {
     res.json(updatedChat);
   }
+  */
 });
 
 // @desc    Remove user from Group
 // @route   PUT /api/chat/groupremove
 // @access  Protected
 const removeFromGroup = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: users, groupAdmin
+  */
+  res.status(501).send("Not implemented - Requires Chat model");
+  
+  // Original implementation commented out
+  /*
   const { chatId, userId } = req.body;
-
-  // check if the requester is admin
 
   const removed = await Chat.findByIdAndUpdate(
     chatId,
@@ -163,15 +211,22 @@ const removeFromGroup = asyncHandler(async (req, res) => {
   } else {
     res.json(removed);
   }
+  */
 });
 
 // @desc    Add user to Group / Leave
 // @route   PUT /api/chat/groupadd
 // @access  Protected
 const addToGroup = asyncHandler(async (req, res) => {
+  /* 
+    NOTE: This function requires:
+    1. chatModel with schema containing: users, groupAdmin
+  */
+  res.status(501).send("Not implemented - Requires Chat model");
+  
+  // Original implementation commented out
+  /*
   const { chatId, userId } = req.body;
-
-  // check if the requester is admin
 
   const added = await Chat.findByIdAndUpdate(
     chatId,
@@ -191,6 +246,7 @@ const addToGroup = asyncHandler(async (req, res) => {
   } else {
     res.json(added);
   }
+  */
 });
 
 module.exports = {
