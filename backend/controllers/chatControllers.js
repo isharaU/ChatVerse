@@ -43,4 +43,15 @@ const accessChat = asyncHandler(async (req, res) => {
   
 });
 
-module.exports = { accessChat };    
+const fetchChats = asyncHandler(async (req, res) => {
+    try {
+      Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+  
+      res.status(200).send(chats);
+    } catch (error) {
+      res.status(400).send({ error: "Chats not found" });
+      throw new Error("Chats not found");
+    }
+});
+
+module.exports = { accessChat, fetchChats };    
