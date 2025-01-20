@@ -47,9 +47,10 @@ const PORT = process.env.PORT;
 
 const server = app.listen(
   PORT,
-  console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+  console.log(`Server running on PORT ${PORT}...`)
 );
 
+/* Commenting out socket.io-related code
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
@@ -89,3 +90,4 @@ io.on("connection", (socket) => {
     socket.leave(userData._id);
   });
 });
+*/
