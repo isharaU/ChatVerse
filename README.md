@@ -1,4 +1,4 @@
-# ChatVerse 🚀 (In Development)
+# ChatVerse 🚀 
 
 ChatVerse is a real-time chat application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack, designed to provide users with a seamless messaging experience.
 
